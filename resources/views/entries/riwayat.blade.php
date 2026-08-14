@@ -18,7 +18,6 @@
 
     @if ($tanggalDipilih)
         <a href="{{ route('entries.export', ['tanggal' => $tanggalDipilih]) }}">📥 Export Excel Tanggal Ini</a>
-        <a href="{{ route('entries.riwayat') }}" style="color: white; margin-right: 15px; text-decoration: none;">Riwayat</a>
     @endif
 
     <br><br>
@@ -31,11 +30,16 @@
             <th>Aktivitas</th>
             <th>Tindakan</th>
             <th>Hasil</th>
-            <th>Rekomendasi</th>
-            <th>Foto</th>
+            <th>Catatan Rekomendasi</th>
+            <th>Foto Rekomendasi</th>
+            <th>Catatan Perbaikan</th>
+            <th>Foto Perbaikan</th>
         </tr>
         @foreach ($traps as $trap)
-            @php $entry = $trap->entries->first(); @endphp
+            @php
+                $entry = $trap->entries->first();
+                $rekom = optional($entry)->rekomendasi;
+            @endphp
             <tr>
                 <td>{{ $trap->no_trap }}</td>
                 <td>{{ $trap->type_detector }}</td>
@@ -43,10 +47,18 @@
                 <td>{{ optional($entry)->aktivitas ?? '-' }}</td>
                 <td>{{ optional($entry)->tindakan ?? '-' }}</td>
                 <td>{{ optional($entry)->hasil ?? '-' }}</td>
-                <td>{{ optional(optional($entry)->rekomendasi)->catatan ?? '-' }}</td>
+                <td>{{ optional($rekom)->rekomendasi_catatan ?? '-' }}</td>
                 <td>
-                    @if (optional($entry)->rekomendasi && $entry->rekomendasi->gambar)
-                        <a href="{{ asset('storage/' . $entry->rekomendasi->gambar) }}" target="_blank">Lihat Foto</a>
+                    @if (optional($rekom)->rekomendasi_gambar)
+                        <a href="{{ asset('storage/' . $rekom->rekomendasi_gambar) }}" target="_blank">Lihat Foto</a>
+                    @else
+                        -
+                    @endif
+                </td>
+                <td>{{ optional($rekom)->perbaikan_catatan ?? '-' }}</td>
+                <td>
+                    @if (optional($rekom)->perbaikan_gambar)
+                        <a href="{{ asset('storage/' . $rekom->perbaikan_gambar) }}" target="_blank">Lihat Foto</a>
                     @else
                         -
                     @endif

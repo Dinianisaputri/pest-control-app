@@ -21,47 +21,49 @@ class EntryController extends Controller
     }
 
     public function store(StoreEntryRequest $request)
-    {
-        $tanggal = $request->input('tanggal');
-        $data = $request->input('entries', []);
-        $files = $request->file('entries', []);
+{
+    $tanggal = $request->input('tanggal');
+    $data = $request->input('entries', []);
+    $files = $request->file('entries', []);
 
-        foreach ($data as $trapId => $row) {
-            if (empty($row['tindakan']) && empty($row['hasil']) && empty($row['catatan'])) {
-                continue;
-            }
+    foreach ($data as $trapId => $row) {
+        $adaIsi = !empty($row['tindakan']) || !empty($row['hasil'])
+            || !empty($row['rekomendasi_catatan']) || !empty($row['perbaikan_catatan']);
 
-            $entry = Entry::updateOrCreate(
-                ['trap_id' => $trapId, 'tanggal' => $tanggal],
-                [
-                    'tindakan' => $row['tindakan'] ?? null,
-                    'aktivitas' => $row['aktivitas'] ?? 'LOW',
-                    'hasil' => $row['hasil'] ?? null,
-                ]
-            );
-
-            $catatan = $row['catatan'] ?? null;
-            $gambarPath = null;
-
-            if (isset($files[$trapId]['gambar']) && $files[$trapId]['gambar']) {
-                $gambarPath = $files[$trapId]['gambar']->store('rekomendasi', 'public');
-            }
-
-            if ($catatan || $gambarPath) {
-                $entry->rekomendasi()->updateOrCreate(
-                    ['entry_id' => $entry->id],
-                    array_filter([
-                        'catatan' => $catatan,
-                        'gambar' => $gambarPath,
-                    ])
-                );
-            }
+        if (!$adaIsi && empty($files[$trapId]['rekomendasi_gambar']) && empty($files[$trapId]['perbaikan_gambar'])) {
+            continue;
         }
 
-        return redirect()->route('entries.create', ['tanggal' => $tanggal])
-            ->with('success', 'Data berhasil disimpan!');
+        $entry = Entry::updateOrCreate(
+            ['trap_id' => $trapId, 'tanggal' => $tanggal],
+            [
+                'tindakan' => $row['tindakan'] ?? null,
+                'aktivitas' => $row['aktivitas'] ?? 'LOW',
+                'hasil' => $row['hasil'] ?? null,
+            ]
+        );
+
+        $update = array_filter([
+            'rekomendasi_catatan' => $row['rekomendasi_catatan'] ?? null,
+            'perbaikan_catatan' => $row['perbaikan_catatan'] ?? null,
+        ]);
+
+        if (isset($files[$trapId]['rekomendasi_gambar']) && $files[$trapId]['rekomendasi_gambar']) {
+            $update['rekomendasi_gambar'] = $files[$trapId]['rekomendasi_gambar']->store('rekomendasi', 'public');
+        }
+
+        if (isset($files[$trapId]['perbaikan_gambar']) && $files[$trapId]['perbaikan_gambar']) {
+            $update['perbaikan_gambar'] = $files[$trapId]['perbaikan_gambar']->store('perbaikan', 'public');
+        }
+
+        if (!empty($update)) {
+            $entry->rekomendasi()->updateOrCreate(['entry_id' => $entry->id], $update);
+        }
     }
 
+    return redirect()->route('entries.create', ['tanggal' => $tanggal])
+        ->with('success', 'Data berhasil disimpan!');
+}
     public function export(Request $request)
     {
         $tanggal = $request->query('tanggal');

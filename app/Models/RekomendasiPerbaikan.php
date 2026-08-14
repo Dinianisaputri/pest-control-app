@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RekomendasiPerbaikan extends Model
 {
-    protected $fillable = ['entry_id', 'catatan', 'gambar'];
+   protected $fillable = ['entry_id', 'rekomendasi_catatan', 'rekomendasi_gambar', 'perbaikan_catatan', 'perbaikan_gambar'];
 
     public function entry()
     {

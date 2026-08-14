@@ -4,6 +4,7 @@
             <a href="{{ route('dashboard') }}" style="color: white; margin-right: 15px; text-decoration: none;">Dashboard</a>
             <a href="{{ route('traps.index') }}" style="color: white; margin-right: 15px; text-decoration: none;">Data Master</a>
             <a href="{{ route('entries.create') }}" style="color: white; margin-right: 15px; text-decoration: none;">Input Harian</a>
+            <a href="{{ route('entries.riwayat') }}" style="color: white; margin-right: 15px; text-decoration: none;">Riwayat</a>
         </div>
         <div style="color: white;">
             {{ auth()->user()->name }} ({{ auth()->user()->role }})

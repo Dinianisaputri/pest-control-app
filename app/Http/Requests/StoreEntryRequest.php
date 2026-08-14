@@ -12,18 +12,19 @@ class StoreEntryRequest extends FormRequest
     }
 
     public function rules(): array
-    {
-        return [
-            'tanggal' => 'required|date',
-            'entries' => 'required|array',
-            'entries.*.aktivitas' => 'nullable|in:LOW,MEDIUM,HIGH',
-            'entries.*.tindakan' => 'nullable|string|max:255',
-            'entries.*.hasil' => 'nullable|string|max:255',
-            'entries.*.catatan' => 'nullable|string|max:500',
-            'entries.*.gambar' => 'nullable|image|max:2048', // max 2MB, harus gambar
-        ];
-    }
-
+{
+    return [
+        'tanggal' => 'required|date',
+        'entries' => 'required|array',
+        'entries.*.aktivitas' => 'nullable|in:LOW,MEDIUM,HIGH',
+        'entries.*.tindakan' => 'nullable|string|max:255',
+        'entries.*.hasil' => 'nullable|string|max:255',
+        'entries.*.rekomendasi_catatan' => 'nullable|string|max:500',
+        'entries.*.rekomendasi_gambar' => 'nullable|image|max:2048',
+        'entries.*.perbaikan_catatan' => 'nullable|string|max:500',
+        'entries.*.perbaikan_gambar' => 'nullable|image|max:2048',
+    ];
+}
     public function messages(): array
     {
         return [
