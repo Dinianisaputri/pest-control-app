@@ -1,0 +1,19 @@
+<svg width="260" height="80" viewBox="0 0 260 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="260" height="80" rx="18" fill="#0F172A"/>
+  <rect x="12" y="12" width="56" height="56" rx="16" fill="url(#paint0_linear_1_2)"/>
+  <path d="M40 24L48 20V32L40 28V24ZM40 24L32 20V32L40 28V24Z" fill="white" fill-opacity="0.96"/>
+  <path d="M27 38C29.5 31.5 35.5 28 40 28C44.5 28 50.5 31.5 53 38C50 42 45.5 44 40 44C34.5 44 30 42 27 38Z" fill="white" fill-opacity="0.96"/>
+  <path d="M40 27V21" stroke="#DFF9FF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M33 31L28 28" stroke="#DFF9FF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M47 31L52 28" stroke="#DFF9FF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M32 42L40 53L48 42" stroke="#DFF9FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M40 48V53" stroke="#DFF9FF" stroke-width="2" stroke-linecap="round"/>
+  <text x="84" y="34" fill="#F8FAFC" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="1.2">PEST</text>
+  <text x="84" y="53" fill="#67E8F9" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="1.2">CONTROL</text>
+  <defs>
+    <linearGradient id="paint0_linear_1_2" x1="12" y1="12" x2="68" y2="68" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#0891B2"/>
+    </linearGradient>
+  </defs>
+</svg>

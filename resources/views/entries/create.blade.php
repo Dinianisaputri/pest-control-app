@@ -1,101 +1,506 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Input Harian</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
+
+<body class="app-shell">
+
     @include('partials.nav')
-    <h1>Input Harian Pest Control</h1>
 
-    @if(session('success'))
-        <p style="color: green;">{{ session('success') }}</p>
-    @endif
+    <div class="page-wrap">
 
-    @if ($errors->any())
-        <div style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 10px;">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+        <!-- HEADER -->
+        <header class="page-header">
+            <div>
+                <p class="page-kicker">Operational Input</p>
+                <h1 class="page-title">Input Harian Pest Control</h1>
+            </div>
+        </header>
 
-    <form method="GET" action="{{ route('entries.create') }}">
-        <label>Pilih Tanggal:</label>
-        <input type="date" name="tanggal" value="{{ $tanggal }}" onchange="this.form.submit()">
-        <a href="{{ route('entries.export', ['tanggal' => $tanggal]) }}">📥 Export Excel Tanggal Ini</a>
-<br><br>
-    </form>
 
-    <form method="POST" action="{{ route('entries.store') }}" enctype="multipart/form-data">
-        @csrf
-        <input type="hidden" name="tanggal" value="{{ $tanggal }}">
+        <!-- ALERT SUCCESS -->
+        @if(session('success'))
+            <div class="alert mb-6">
+                {{ session('success') }}
+            </div>
+        @endif
 
-        <table border="1" cellpadding="6">
-            <tr>
-                <th>No. Trap</th>
-                <th>Jenis</th>
-                <th>Lokasi</th>
-                <th>Aktivitas</th>
-                <th>Tindakan</th>
-                <th>Hasil</th>
-                <th>Rekomendasi</th>
-                <th>Perbaikan</th>
-                <th>Status</th>
-            </tr>
-            @foreach ($traps as $trap)
-                @php
-                    $existing = $existingEntries->get($trap->id);
-                    $rekom = optional($existing)->rekomendasi;
-                    $adaRekomendasi = $rekom && ($rekom->rekomendasi_catatan || $rekom->rekomendasi_gambar);
-                    $adaPerbaikan = $rekom && ($rekom->perbaikan_catatan || $rekom->perbaikan_gambar);
-                @endphp
-                <tr>
-                    <td>{{ $trap->no_trap }}</td>
-                    <td>{{ $trap->type_detector }}</td>
-                    <td>{{ $trap->lokasi }}</td>
-                    <td>
-                        <select name="entries[{{ $trap->id }}][aktivitas]">
-                            <option value="LOW" {{ optional($existing)->aktivitas == 'LOW' ? 'selected' : '' }}>LOW</option>
-                            <option value="MEDIUM" {{ optional($existing)->aktivitas == 'MEDIUM' ? 'selected' : '' }}>MEDIUM</option>
-                            <option value="HIGH" {{ optional($existing)->aktivitas == 'HIGH' ? 'selected' : '' }}>HIGH</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" name="entries[{{ $trap->id }}][tindakan]" value="{{ optional($existing)->tindakan }}">
-                    </td>
-                    <td>
-                        <input type="text" name="entries[{{ $trap->id }}][hasil]" value="{{ optional($existing)->hasil }}">
-                    </td>
-                    <td>
-                        <textarea name="entries[{{ $trap->id }}][rekomendasi_catatan]" rows="2" placeholder="Catatan rekomendasi">{{ optional($rekom)->rekomendasi_catatan }}</textarea>
-                        <br>
-                        <input type="file" name="entries[{{ $trap->id }}][rekomendasi_gambar]" accept="image/*">
-                        @if (optional($rekom)->rekomendasi_gambar)
-                            <br><a href="{{ asset('storage/' . $rekom->rekomendasi_gambar) }}" target="_blank">Lihat foto lama</a>
-                        @endif
-                    </td>
-                    <td>
-                        <textarea name="entries[{{ $trap->id }}][perbaikan_catatan]" rows="2" placeholder="Catatan perbaikan">{{ optional($rekom)->perbaikan_catatan }}</textarea>
-                        <br>
-                        <input type="file" name="entries[{{ $trap->id }}][perbaikan_gambar]" accept="image/*">
-                        @if (optional($rekom)->perbaikan_gambar)
-                            <br><a href="{{ asset('storage/' . $rekom->perbaikan_gambar) }}" target="_blank">Lihat foto lama</a>
-                        @endif
-                    </td>
-                    <td style="text-align:center;">
-                        <span title="Rekomendasi" style="display:inline-block; width:14px; height:14px; border-radius:50%; background: {{ $adaRekomendasi ? '#4caf50' : '#f44336' }};"></span>
-                        <span title="Perbaikan" style="display:inline-block; width:14px; height:14px; border-radius:50%; background: {{ $adaPerbaikan ? '#4caf50' : '#f44336' }};"></span>
-                        <br>
-                        <small>R &nbsp; P</small>
-                    </td>
-                </tr>
-            @endforeach
-        </table>
 
-        <br>
-        <button type="submit">Simpan Semua</button>
-    </form>
+        <!-- ALERT ERROR -->
+        @if ($errors->any())
+            <div class="alert-error mb-6">
+                <ul class="list-disc space-y-1 pl-5">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+
+        <!-- FILTER BAR -->
+        <section class="form-card mb-6">
+
+            <div class="flex flex-col gap-4 lg:flex-row lg:items-end">
+
+                <!-- TANGGAL -->
+                <form
+                    method="GET"
+                    action="{{ route('entries.create') }}"
+                    class="w-full lg:w-64"
+                >
+                    <label
+                        for="tanggal"
+                        class="field-label"
+                    >
+                        Pilih Tanggal
+                    </label>
+
+                    <input
+                        id="tanggal"
+                        type="date"
+                        name="tanggal"
+                        value="{{ $tanggal }}"
+                        onchange="this.form.submit()"
+                        class="input w-full"
+                    >
+                </form>
+
+
+                <!-- SEARCH -->
+                <div class="w-full lg:flex-1">
+
+                    <label
+                        for="searchInput"
+                        class="field-label"
+                    >
+                        Cari Data Trap
+                    </label>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="🔍 Cari No. Trap, Jenis, atau Lokasi..."
+                        onkeyup="filterTable()"
+                        class="input w-full"
+                    >
+
+                </div>
+
+
+                <!-- EXPORT -->
+                <div class="w-full lg:w-auto">
+
+                    <label class="field-label invisible hidden lg:block">
+                        Export
+                    </label>
+
+                    <a
+                        href="{{ route('entries.export', ['tanggal' => $tanggal]) }}"
+                        class="btn-secondary flex w-full items-center justify-center gap-2 whitespace-nowrap lg:w-auto"
+                    >
+                        <span>📊</span>
+                        <span>Export Excel</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FORM INPUT -->
+        <form
+            method="POST"
+            action="{{ route('entries.store') }}"
+            enctype="multipart/form-data"
+        >
+
+            @csrf
+
+            <input
+                type="hidden"
+                name="tanggal"
+                value="{{ $tanggal }}"
+            >
+
+
+            <!-- PANEL INSPEKSI -->
+            <section class="panel">
+
+                <!-- PANEL HEADER -->
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2 class="panel-title">
+                            Data inspeksi trap
+                        </h2>
+
+                        <p
+                            id="searchResult"
+                            class="mt-1 text-sm text-slate-500"
+                        >
+                            Menampilkan semua data trap
+                        </p>
+
+                    </div>
+
+
+                    <!-- STATUS -->
+                    <div class="status-stack">
+
+                        <span class="status-pill success">
+                            R ready
+                        </span>
+
+                        <span class="status-pill warning">
+                            P pending
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TABLE -->
+                <div class="table-wrapper p-3 sm:p-5">
+
+                    <table
+                        class="data-table"
+                        id="entryTable"
+                    >
+
+                        <thead>
+
+                            <tr>
+                                <th>No. Trap</th>
+                                <th>Jenis</th>
+                                <th>Lokasi</th>
+                                <th>Aktivitas</th>
+                                <th>Tindakan</th>
+                                <th>Hasil</th>
+                                <th>Rekomendasi</th>
+                                <th>Perbaikan</th>
+                                <th>Status</th>
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            @foreach ($traps as $trap)
+
+                                @php
+
+                                    $existing = $existingEntries->get($trap->id);
+
+                                    $rekom = optional($existing)->rekomendasi;
+
+                                    $adaRekomendasi =
+                                        $rekom &&
+                                        (
+                                            $rekom->rekomendasi_catatan ||
+                                            $rekom->rekomendasi_gambar
+                                        );
+
+                                    $adaPerbaikan =
+                                        $rekom &&
+                                        (
+                                            $rekom->perbaikan_catatan ||
+                                            $rekom->perbaikan_gambar
+                                        );
+
+                                @endphp
+
+
+                                <tr>
+
+                                    <!-- NO TRAP -->
+                                    <td>
+                                        <span class="font-semibold text-slate-700">
+                                            {{ $trap->no_trap }}
+                                        </span>
+                                    </td>
+
+
+                                    <!-- JENIS -->
+                                    <td>
+                                        {{ $trap->type_detector }}
+                                    </td>
+
+
+                                    <!-- LOKASI -->
+                                    <td>
+                                        {{ $trap->lokasi }}
+                                    </td>
+
+
+                                    <!-- AKTIVITAS -->
+                                    <td>
+
+                                        <select
+                                            name="entries[{{ $trap->id }}][aktivitas]"
+                                            class="select"
+                                        >
+
+                                            <option
+                                                value="LOW"
+                                                {{ optional($existing)->aktivitas == 'LOW' ? 'selected' : '' }}
+                                            >
+                                                LOW
+                                            </option>
+
+                                            <option
+                                                value="MEDIUM"
+                                                {{ optional($existing)->aktivitas == 'MEDIUM' ? 'selected' : '' }}
+                                            >
+                                                MEDIUM
+                                            </option>
+
+                                            <option
+                                                value="HIGH"
+                                                {{ optional($existing)->aktivitas == 'HIGH' ? 'selected' : '' }}
+                                            >
+                                                HIGH
+                                            </option>
+
+                                        </select>
+
+                                    </td>
+
+
+                                    <!-- TINDAKAN -->
+                                    <td>
+
+                                        <input
+                                            type="text"
+                                            name="entries[{{ $trap->id }}][tindakan]"
+                                            value="{{ optional($existing)->tindakan }}"
+                                            class="input"
+                                        >
+
+                                    </td>
+
+
+                                    <!-- HASIL -->
+                                    <td>
+
+                                        <input
+                                            type="text"
+                                            name="entries[{{ $trap->id }}][hasil]"
+                                            value="{{ optional($existing)->hasil }}"
+                                            class="input"
+                                        >
+
+                                    </td>
+
+
+                                    <!-- REKOMENDASI -->
+                                    <td>
+
+                                        <textarea
+                                            name="entries[{{ $trap->id }}][rekomendasi_catatan]"
+                                            rows="2"
+                                            placeholder="Catatan rekomendasi"
+                                            class="textarea"
+                                        >{{ optional($rekom)->rekomendasi_catatan }}</textarea>
+
+
+                                        <input
+                                            type="file"
+                                            name="entries[{{ $trap->id }}][rekomendasi_gambar]"
+                                            accept="image/*"
+                                            class="mt-3 block w-full text-sm text-slate-500 file:mr-4 file:rounded-full file:border-0 file:bg-cyan-50 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-cyan-700 hover:file:bg-cyan-100"
+                                        >
+
+
+                                        @if (optional($rekom)->rekomendasi_gambar)
+
+                                            <a
+                                                href="{{ asset('storage/' . $rekom->rekomendasi_gambar) }}"
+                                                target="_blank"
+                                                class="mt-2 inline-block text-xs font-medium text-cyan-600 hover:underline"
+                                            >
+                                                Lihat foto lama
+                                            </a>
+
+                                        @endif
+
+                                    </td>
+
+
+                                    <!-- PERBAIKAN -->
+                                    <td>
+
+                                        <textarea
+                                            name="entries[{{ $trap->id }}][perbaikan_catatan]"
+                                            rows="2"
+                                            placeholder="Catatan perbaikan"
+                                            class="textarea"
+                                        >{{ optional($rekom)->perbaikan_catatan }}</textarea>
+
+
+                                        <input
+                                            type="file"
+                                            name="entries[{{ $trap->id }}][perbaikan_gambar]"
+                                            accept="image/*"
+                                            class="mt-3 block w-full text-sm text-slate-500 file:mr-4 file:rounded-full file:border-0 file:bg-cyan-50 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-cyan-700 hover:file:bg-cyan-100"
+                                        >
+
+
+                                        @if (optional($rekom)->perbaikan_gambar)
+
+                                            <a
+                                                href="{{ asset('storage/' . $rekom->perbaikan_gambar) }}"
+                                                target="_blank"
+                                                class="mt-2 inline-block text-xs font-medium text-cyan-600 hover:underline"
+                                            >
+                                                Lihat foto lama
+                                            </a>
+
+                                        @endif
+
+                                    </td>
+
+
+                                    <!-- STATUS -->
+                                    <td class="text-center">
+
+                                        <div class="flex justify-center gap-2">
+
+                                            <span
+                                                title="Rekomendasi"
+                                                class="inline-block h-4 w-4 rounded-full border border-white shadow-sm"
+                                                style="background: {{ $adaRekomendasi ? '#10b981' : '#ef4444' }};"
+                                            ></span>
+
+
+                                            <span
+                                                title="Perbaikan"
+                                                class="inline-block h-4 w-4 rounded-full border border-white shadow-sm"
+                                                style="background: {{ $adaPerbaikan ? '#10b981' : '#ef4444' }};"
+                                            ></span>
+
+                                        </div>
+
+
+                                        <div class="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                                            R / P
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            @endforeach
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- SIMPAN -->
+            <div class="mt-6 flex justify-end">
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                >
+                    Simpan Semua
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- SEARCH SCRIPT -->
+    <script>
+
+        function filterTable() {
+
+            const input =
+                document.getElementById('searchInput');
+
+            const filter =
+                input.value.toLowerCase().trim();
+
+            const table =
+                document.getElementById('entryTable');
+
+            const rows =
+                table.querySelectorAll('tbody tr');
+
+            const resultText =
+                document.getElementById('searchResult');
+
+            let visibleCount = 0;
+
+
+            rows.forEach(row => {
+
+                const cells =
+                    row.querySelectorAll('td');
+
+                const noTrap =
+                    cells[0]?.textContent.toLowerCase() || '';
+
+                const jenis =
+                    cells[1]?.textContent.toLowerCase() || '';
+
+                const lokasi =
+                    cells[2]?.textContent.toLowerCase() || '';
+
+
+                const match =
+                    noTrap.includes(filter) ||
+                    jenis.includes(filter) ||
+                    lokasi.includes(filter);
+
+
+                if (match) {
+
+                    row.style.display = '';
+
+                    visibleCount++;
+
+                } else {
+
+                    row.style.display = 'none';
+
+                }
+
+            });
+
+
+            if (filter === '') {
+
+                resultText.textContent =
+                    'Menampilkan semua data trap';
+
+            } else {
+
+                resultText.textContent =
+                    `Menampilkan ${visibleCount} data trap`;
+
+            }
+
+        }
+
+    </script>
+
 </body>
 </html>
