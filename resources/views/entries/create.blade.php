@@ -317,16 +317,16 @@
                                             type="file"
                                             name="entries[{{ $trap->id }}][rekomendasi_gambar]"
                                             accept="image/*"
-                                            class="mt-3 block w-full text-sm text-slate-500 file:mr-4 file:rounded-full file:border-0 file:bg-cyan-50 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-cyan-700 hover:file:bg-cyan-100"
+                                            class="mt-3 block w-full text-sm text-slate-500 file:mr-4 file:rounded-full file:border-0 file:bg-[#fff0d2] file:px-3 file:py-2 file:text-sm file:font-semibold file:text-[#0B1F3A] hover:file:bg-[#ffe1ad]"
                                         >
 
 
                                         @if (optional($rekom)->rekomendasi_gambar)
 
                                             <a
-                                                href="{{ asset('storage/' . $rekom->rekomendasi_gambar) }}"
+                                                href="{{ route('photo.file', ['path' => $rekom->rekomendasi_gambar]) }}"
                                                 target="_blank"
-                                                class="mt-2 inline-block text-xs font-medium text-cyan-600 hover:underline"
+                                                class="mt-2 inline-block text-xs font-medium text-[#1d527d] hover:underline"
                                             >
                                                 Lihat foto lama
                                             </a>
@@ -351,16 +351,16 @@
                                             type="file"
                                             name="entries[{{ $trap->id }}][perbaikan_gambar]"
                                             accept="image/*"
-                                            class="mt-3 block w-full text-sm text-slate-500 file:mr-4 file:rounded-full file:border-0 file:bg-cyan-50 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-cyan-700 hover:file:bg-cyan-100"
+                                            class="mt-3 block w-full text-sm text-slate-500 file:mr-4 file:rounded-full file:border-0 file:bg-[#fff0d2] file:px-3 file:py-2 file:text-sm file:font-semibold file:text-[#0B1F3A] hover:file:bg-[#ffe1ad]"
                                         >
 
 
                                         @if (optional($rekom)->perbaikan_gambar)
 
                                             <a
-                                                href="{{ asset('storage/' . $rekom->perbaikan_gambar) }}"
+                                                href="{{ route('photo.file', ['path' => $rekom->perbaikan_gambar]) }}"
                                                 target="_blank"
-                                                class="mt-2 inline-block text-xs font-medium text-cyan-600 hover:underline"
+                                                class="mt-2 inline-block text-xs font-medium text-[#1d527d] hover:underline"
                                             >
                                                 Lihat foto lama
                                             </a>
@@ -378,14 +378,14 @@
                                             <span
                                                 title="Rekomendasi"
                                                 class="inline-block h-4 w-4 rounded-full border border-white shadow-sm"
-                                                style="background: {{ $adaRekomendasi ? '#10b981' : '#ef4444' }};"
+                                                style="background: {{ $adaRekomendasi ? '#1d527d' : '#0B1F3A' }};"
                                             ></span>
 
 
                                             <span
                                                 title="Perbaikan"
                                                 class="inline-block h-4 w-4 rounded-full border border-white shadow-sm"
-                                                style="background: {{ $adaPerbaikan ? '#10b981' : '#ef4444' }};"
+                                                style="background: {{ $adaPerbaikan ? '#1d527d' : '#0B1F3A' }};"
                                             ></span>
 
                                         </div>

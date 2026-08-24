@@ -37,7 +37,7 @@
         </div>
 
         <div class="flex items-center justify-between gap-3 pt-2">
-            <a class="text-sm font-medium text-cyan-600 hover:text-cyan-700" href="{{ route('login') }}">
+            <a class="text-sm font-medium text-[#1d527d] hover:text-[#0B1F3A]" href="{{ route('login') }}">
                 Sudah terdaftar?
             </a>
 

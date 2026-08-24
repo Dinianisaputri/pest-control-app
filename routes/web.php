@@ -4,14 +4,28 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrapController;
 use App\Http\Controllers\EntryController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+
+use App\Http\Controllers\LandingController;
 
 Route::get('/', function () {
-    return view('welcome');
+    if (auth()->check()) {
+        return redirect()->route('dashboard');
+    }
+    return app(LandingController::class)->index();
 });
 
 use App\Http\Controllers\DashboardController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/foto/{path}', function (string $path) {
+    $disk = Storage::disk('public');
+
+    abort_unless($disk->exists($path), 404);
+
+    return response()->file($disk->path($path));
+})->where('path', '.*')->middleware('auth')->name('photo.file');
 
 Route::middleware('auth')->group(function () {
     Route::get('/traps', [TrapController::class, 'index'])->name('traps.index');

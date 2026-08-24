@@ -26,12 +26,12 @@
 
         <div class="flex items-center justify-between gap-3">
             <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-slate-300 text-cyan-600 shadow-sm focus:ring-cyan-500" name="remember">
+                <input id="remember_me" type="checkbox" class="rounded border-[#cbd6e2] text-[#0B1F3A] shadow-sm focus:ring-[#F4A340]" name="remember">
                 <span class="ml-2 text-sm text-slate-600">Ingat saya</span>
             </label>
 
             @if (Route::has('password.request'))
-                <a class="text-sm font-medium text-cyan-600 hover:text-cyan-700" href="{{ route('password.request') }}">
+                <a class="text-sm font-medium text-[#1d527d] hover:text-[#0B1F3A]" href="{{ route('password.request') }}">
                     Lupa password?
                 </a>
             @endif

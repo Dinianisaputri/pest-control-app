@@ -84,7 +84,7 @@
                                 <td>{{ optional($rekom)->rekomendasi_catatan ?? '-' }}</td>
                                 <td>
                                     @if (optional($rekom)->rekomendasi_gambar)
-                                        <a href="{{ asset('storage/' . $rekom->rekomendasi_gambar) }}" target="_blank" class="text-cyan-600 hover:underline">Lihat Foto</a>
+                                        <a href="{{ route('photo.file', ['path' => $rekom->rekomendasi_gambar]) }}" target="_blank" class="text-[#1d527d] hover:underline">Lihat Foto</a>
                                     @else
                                         -
                                     @endif
@@ -92,7 +92,7 @@
                                 <td>{{ optional($rekom)->perbaikan_catatan ?? '-' }}</td>
                                 <td>
                                     @if (optional($rekom)->perbaikan_gambar)
-                                        <a href="{{ asset('storage/' . $rekom->perbaikan_gambar) }}" target="_blank" class="text-cyan-600 hover:underline">Lihat Foto</a>
+                                        <a href="{{ route('photo.file', ['path' => $rekom->perbaikan_gambar]) }}" target="_blank" class="text-[#1d527d] hover:underline">Lihat Foto</a>
                                     @else
                                         -
                                     @endif
