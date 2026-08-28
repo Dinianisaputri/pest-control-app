@@ -12,16 +12,16 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name' => 'Admin QC',
-            'email' => 'admin@starfood.com',
-            'password' => Hash::make('password123'),
+            'email' => 'Qa@starfood.com',
+            'password' => Hash::make('Qapc$123'),
             'role' => 'admin',
         ]);
 
         User::create([
-            'name' => 'Pengelola Hama',
-            'email' => 'pengelola@starfood.com',
-            'password' => Hash::make('password123'),
-            'role' => 'pengelola',
+            'name' => 'Operator PC',
+            'email' => 'operatorpc@starfood.com',
+            'password' => Hash::make('Operatorpc$123'),
+            'role' => 'operatorpc',
         ]);
     }
 }
