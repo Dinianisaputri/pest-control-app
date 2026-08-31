@@ -114,6 +114,27 @@
         </section>
 
 
+        <div class="jump-controls-wrap">
+            <button
+                type="button"
+                id="jumpToTopBtn"
+                class="jump-control"
+                aria-label="Kembali ke atas"
+                title="Ke Atas"
+            >
+                ↑
+            </button>
+            <button
+                type="button"
+                id="jumpToSaveBtn"
+                class="jump-control jump-control--primary"
+                aria-label="Lanjut ke tombol simpan semua"
+                title="Lanjut ke Simpan Semua"
+            >
+                ↓
+            </button>
+        </div>
+
         <!-- FORM INPUT -->
         <form
             method="POST"
@@ -156,10 +177,12 @@
                     <div class="status-stack">
 
                         <span class="status-pill success">
+                            <span class="status-dot"></span>
                             R ready
                         </span>
 
                         <span class="status-pill warning">
+                            <span class="status-dot"></span>
                             P pending
                         </span>
 
@@ -411,7 +434,7 @@
 
 
             <!-- SIMPAN -->
-            <div class="mt-6 flex justify-end">
+            <div id="saveAllSection" class="mt-6 flex justify-end">
 
                 <button
                     type="submit"
@@ -429,6 +452,20 @@
 
     <!-- SEARCH SCRIPT -->
     <script>
+
+        document.getElementById('jumpToTopBtn')?.addEventListener('click', function () {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        document.getElementById('jumpToSaveBtn')?.addEventListener('click', function () {
+            document.getElementById('saveAllSection')?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
 
         function filterTable() {
 

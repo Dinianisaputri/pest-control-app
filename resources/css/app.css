@@ -100,7 +100,17 @@ body {
     }
 
     .stat-card {
-        @apply panel relative overflow-hidden p-5;
+        @apply panel relative overflow-hidden p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(15,23,42,0.10)];
+    }
+
+    .stat-card::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto auto 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(255,255,255,0.75), rgba(255,255,255,0.18));
+        pointer-events: none;
     }
 
     .stat-card::after {
@@ -108,26 +118,31 @@ body {
         position: absolute;
         top: -28px;
         right: -24px;
-        width: 110px;
-        height: 110px;
+        width: 130px;
+        height: 130px;
         border-radius: 9999px;
-        background: rgba(255, 255, 255, 0.24);
+        background: rgba(255, 255, 255, 0.26);
+        border: 1px solid rgba(255,255,255,0.4);
     }
 
     .stat-card--cyan {
-        @apply bg-gradient-to-br from-white via-white to-[#edf4fa];
+        @apply bg-gradient-to-br from-[#ecfeff] via-white to-[#dff5ff];
+        border: 1px solid #bfeaf5;
     }
 
     .stat-card--emerald {
-        @apply bg-gradient-to-br from-white via-white to-[#f7ead5];
+        @apply bg-gradient-to-br from-[#ecfdf5] via-white to-[#eafaf4];
+        border: 1px solid #c9f5d8;
     }
 
     .stat-card--amber {
-        @apply bg-gradient-to-br from-white via-white to-[#fff0d2];
+        @apply bg-gradient-to-br from-[#fff7ed] via-white to-[#fff0d2];
+        border: 1px solid #f6d7a6;
     }
 
     .stat-card--rose {
-        @apply bg-gradient-to-br from-white via-white to-[#e8eef5];
+        @apply bg-gradient-to-br from-[#fdf2f8] via-white to-[#eef4ff];
+        border: 1px solid #f4d2e8;
     }
 
     .stat-top {
@@ -135,11 +150,27 @@ body {
     }
 
     .stat-icon {
-        @apply inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/60 bg-white/80 text-xl shadow-sm;
+        @apply inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/80 bg-white/85 text-xl shadow-[0_8px_18px_rgba(15,23,42,0.08)];
+    }
+
+    .stat-card--cyan .stat-icon {
+        @apply bg-cyan-50 text-cyan-700 border-cyan-100;
+    }
+
+    .stat-card--emerald .stat-icon {
+        @apply bg-emerald-50 text-emerald-700 border-emerald-100;
+    }
+
+    .stat-card--amber .stat-icon {
+        @apply bg-amber-50 text-amber-700 border-amber-100;
+    }
+
+    .stat-card--rose .stat-icon {
+        @apply bg-rose-50 text-rose-700 border-rose-100;
     }
 
     .stat-trend {
-        @apply inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em];
+        @apply inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] shadow-sm;
     }
 
     .stat-trend--positive {
@@ -168,6 +199,25 @@ body {
 
     .status-board {
         @apply space-y-4;
+    }
+
+    .jump-controls-wrap {
+        @apply fixed bottom-6 right-6 z-50 flex flex-col gap-2;
+    }
+
+    .jump-control {
+        @apply inline-flex h-12 w-12 items-center justify-center rounded-full border border-slate-200 bg-white text-xl font-bold text-slate-700 shadow-[0_12px_28px_rgba(15,23,42,0.12)] transition-all duration-200 hover:-translate-y-0.5 hover:scale-105 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#155e63]/30;
+    }
+
+    .jump-control--primary {
+        @apply border-[#155e63] bg-[#155e63] text-white hover:bg-[#0f4b4d];
+    }
+
+    @media (max-width: 640px) {
+        .jump-controls-wrap {
+            right: 1rem;
+            bottom: 1rem;
+        }
     }
 
     .chart-grid {
@@ -246,7 +296,7 @@ body {
         @apply inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white text-[10px] font-bold text-white shadow-sm;
     }
 
-    .btn {
+.btn {
         @apply inline-flex items-center justify-center rounded-xl border px-4 py-2.5 text-sm font-semibold transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#f07f5f]/45;
     }
 
@@ -328,20 +378,40 @@ body {
         @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide;
     }
 
+    .status-dot {
+        @apply inline-block h-2.5 w-2.5 rounded-full;
+    }
+
     .status-pill.success {
         @apply border-emerald-200 bg-emerald-50 text-emerald-700;
+    }
+
+    .status-pill.success .status-dot {
+        @apply bg-emerald-500;
     }
 
     .status-pill.warning {
         @apply border-amber-200 bg-amber-50 text-amber-700;
     }
 
+    .status-pill.warning .status-dot {
+        @apply bg-amber-500;
+    }
+
     .status-pill.danger {
         @apply border-red-200 bg-red-50 text-red-700;
     }
 
+    .status-pill.danger .status-dot {
+        @apply bg-red-500;
+    }
+
     .status-pill.neutral {
         @apply border-slate-200 bg-slate-100 text-slate-600;
+    }
+
+    .status-pill.neutral .status-dot {
+        @apply bg-slate-500;
     }
 
     .alert {

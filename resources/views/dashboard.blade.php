@@ -182,34 +182,34 @@
                                             {
                                                 label: 'LOW',
                                                 data: lowData,
-                                                borderColor: '#1d527d',
-                                                backgroundColor: buatGradient(ctxMonthly, (a) => `rgba(29, 82, 125, ${a})`),
+                                                borderColor: '#10b981',
+                                                backgroundColor: buatGradient(ctxMonthly, (a) => `rgba(16, 185, 129, ${a})`),
                                                 tension: 0.4,
                                                 fill: true,
                                                 pointRadius: 4,
-                                                pointBackgroundColor: '#1d527d',
+                                                pointBackgroundColor: '#10b981',
                                                 borderWidth: 2.5,
                                             },
                                             {
                                                 label: 'MEDIUM',
                                                 data: mediumData,
-                                                borderColor: '#F4A340',
-                                                backgroundColor: buatGradient(ctxMonthly, (a) => `rgba(244, 163, 64, ${a})`),
+                                                borderColor: '#f59e0b',
+                                                backgroundColor: buatGradient(ctxMonthly, (a) => `rgba(245, 158, 11, ${a})`),
                                                 tension: 0.4,
                                                 fill: true,
                                                 pointRadius: 4,
-                                                pointBackgroundColor: '#F4A340',
+                                                pointBackgroundColor: '#f59e0b',
                                                 borderWidth: 2.5,
                                             },
                                             {
                                                 label: 'HIGH',
                                                 data: highData,
-                                                borderColor: '#0B1F3A',
-                                                backgroundColor: buatGradient(ctxMonthly, (a) => `rgba(11, 31, 58, ${a})`),
+                                                borderColor: '#ef4444',
+                                                backgroundColor: buatGradient(ctxMonthly, (a) => `rgba(239, 68, 68, ${a})`),
                                                 tension: 0.4,
                                                 fill: true,
                                                 pointRadius: 4,
-                                                pointBackgroundColor: '#0B1F3A',
+                                                pointBackgroundColor: '#ef4444',
                                                 borderWidth: 2.5,
                                             },
                                         ]
@@ -262,9 +262,9 @@
                                 @foreach ($todayEntries as $entry)
                                     @php
                                         $color = match($entry->aktivitas) {
-                                            'LOW' => '#1d527d',
-                                            'MEDIUM' => '#F4A340',
-                                            'HIGH' => '#0B1F3A',
+                                            'LOW' => '#10b981',
+                                            'MEDIUM' => '#f59e0b',
+                                            'HIGH' => '#ef4444',
                                             default => '#94a3b8',
                                         };
                                     @endphp
@@ -278,6 +278,7 @@
                 </div>
             </section>
         </div>
+
         <div class="mt-8">
             <section class="panel">
                 <div class="panel-header">

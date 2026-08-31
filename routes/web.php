@@ -43,5 +43,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/traps/{trap}', [TrapController::class, 'update'])->name('traps.update');
     Route::delete('/traps/{trap}', [TrapController::class, 'destroy'])->name('traps.destroy');
 });
-
+Route::get('/test-laravel', function () {
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Laravel berhasil menerima request',
+    ]);
+});
 require __DIR__.'/auth.php';
