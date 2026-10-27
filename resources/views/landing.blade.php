@@ -5,35 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Starfood International - Sistem Monitoring Pest Control</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
-        body { background: #f3f8f6 !important; color: #123b3a !important; }
-        body > nav { background: #123b3a !important; }
-        body > nav a { color: #d9eeeb !important; }
-        body > nav a:last-child,
-        body > section:first-of-type a { background: #f07f5f !important; color: white !important; }
-        body > section:first-of-type { background: linear-gradient(135deg, #123b3a 0%, #155e63 60%, #1c7a7b 100%) !important; }
-        body > section:first-of-type span { color: #ffd8cb !important; border-color: rgba(240,127,95,.45) !important; background: rgba(240,127,95,.15) !important; }
-        body > section:first-of-type p { color: #d9eeeb !important; }
-        body > section:nth-of-type(2) > div > div > div > div:first-child,
-        body > section:nth-of-type(2) > div > div > div > div:nth-child(2),
-        body > section:nth-of-type(2) > div > div > div > div:nth-child(3) { color: #1c7a7b !important; }
-        #device { background: #e6f1ee !important; }
-        #layanan { border-color: #c7dcd8 !important; }
-        #device p, #layanan p, #keunggulan p { color: #52716e !important; }
-        #device > div > div > div, #layanan > div > div > div { border-color: #c7dcd8 !important; }
-        #keunggulan > div > div:first-child > div { background: #e0f0ed !important; }
-        #keunggulan > div > div:nth-child(2) > div { background: #ffe6de !important; }
-        #keunggulan > div > div:nth-child(3) > div { background: #f9e1db !important; }
-        footer { background: #123b3a !important; color: #d9eeeb !important; }
-        @media (max-width: 700px) {
-            nav { gap: 16px; flex-wrap: wrap; }
-            nav > div { gap: 12px !important; flex-wrap: wrap; justify-content: flex-end; }
-            nav > div > a:not(:last-child) { display: none; }
-            #pabrik { grid-template-columns: 1fr !important; }
-        }
-    </style>
 </head>
-<body style="margin:0; font-family: 'Poppins', sans-serif; background: #f8fafc; color: #1e293b;">
+<body class="landing-page" style="margin:0;">
 
     <nav style="background: #0f172a; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50;">
         <img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 36px;">
@@ -95,56 +68,56 @@
             <div style="background:white; border:1px solid #e2e8f0; border-radius:16px; overflow:hidden;">
                 <img src="{{ asset('images/device-1.jpeg') }}" alt="Device 1" style="width:100%; aspect-ratio:4/3; object-fit:cover; background:#e2e8f0;">
                 <div style="padding:14px;">
-                    <h3 style="font-size:14px; font-weight:700; margin:0;">Nama Device 1</h3>
-                    <p style="font-size:12px; color:#64748b; margin:4px 0 0;">Keterangan singkat device</p>
+                    <h3 style="font-size:14px; font-weight:700; margin:0;">Rodent Bait Station</h3>
+                    <p style="font-size:12px; color:#64748b; margin:4px 0 0;">Perangkat untuk penempatan umpan dan pengendalian tikus secara aman.</p>
                 </div>
             </div>
 
             <div style="background:white; border:1px solid #e2e8f0; border-radius:16px; overflow:hidden;">
                 <img src="{{ asset('images/device-2.jpeg') }}" alt="Device 2" style="width:100%; aspect-ratio:4/3; object-fit:cover; background:#e2e8f0;">
                 <div style="padding:14px;">
-                    <h3 style="font-size:14px; font-weight:700; margin:0;">Nama Device 2</h3>
-                    <p style="font-size:12px; color:#64748b; margin:4px 0 0;">Keterangan singkat device</p>
+                    <h3 style="font-size:14px; font-weight:700; margin:0;">Thermal Fogger</h3>
+                    <p style="font-size:12px; color:#64748b; margin:4px 0 0;">Perangkat untuk menyemprotkan obat hama dalam bentuk kabut panas.</p>
                 </div>
             </div>
 
             <div style="background:white; border:1px solid #e2e8f0; border-radius:16px; overflow:hidden;">
                 <img src="{{ asset('images/device-3.jpeg') }}" alt="Device 3" style="width:100%; aspect-ratio:4/3; object-fit:cover; background:#e2e8f0;">
                 <div style="padding:14px;">
-                    <h3 style="font-size:14px; font-weight:700; margin:0;">Nama Device 3</h3>
-                    <p style="font-size:12px; color:#64748b; margin:4px 0 0;">Keterangan singkat device</p>
+                    <h3 style="font-size:14px; font-weight:700; margin:0;">Fly Trap</h3>
+                    <p style="font-size:12px; color:#64748b; margin:4px 0 0;">Perangkat untuk menangkap lalat secara efektif.</p>
                 </div>
             </div>
 
             <div style="background:white; border:1px solid #e2e8f0; border-radius:16px; overflow:hidden;">
                 <img src="{{ asset('images/device-4.jpeg') }}" alt="Device 4" style="width:100%; aspect-ratio:4/3; object-fit:cover; background:#e2e8f0;">
                 <div style="padding:14px;">
-                    <h3 style="font-size:14px; font-weight:700; margin:0;">Nama Device 4</h3>
-                    <p style="font-size:12px; color:#64748b; margin:4px 0 0;">Keterangan singkat device</p>
+                    <h3 style="font-size:14px; font-weight:700; margin:0;">Rodent Live Trap</h3>
+                    <p style="font-size:12px; color:#64748b; margin:4px 0 0;">Perangkat untuk menangkap tikus secara hidup.</p>
                 </div>
             </div>
 
             <div style="background:white; border:1px solid #e2e8f0; border-radius:16px; overflow:hidden;">
                 <img src="{{ asset('images/device-5.jpeg') }}" alt="Device 5" style="width:100%; aspect-ratio:4/3; object-fit:cover; background:#e2e8f0;">
                 <div style="padding:14px;">
-                    <h3 style="font-size:14px; font-weight:700; margin:0;">Nama Device 5</h3>
-                    <p style="font-size:12px; color:#64748b; margin:4px 0 0;">Keterangan singkat device</p>
+                    <h3 style="font-size:14px; font-weight:700; margin:0;">ULV Fogger</h3>
+                    <p style="font-size:12px; color:#64748b; margin:4px 0 0;">Perangkat untuk menyemprotkan obat hama dalam bentuk kabut ultra-lemah.</p>
                 </div>
             </div>
 
             <div style="background:white; border:1px solid #e2e8f0; border-radius:16px; overflow:hidden;">
                 <img src="{{ asset('images/device-6.jpeg') }}" alt="Device 6" style="width:100%; aspect-ratio:4/3; object-fit:cover; background:#e2e8f0;">
                 <div style="padding:14px;">
-                    <h3 style="font-size:14px; font-weight:700; margin:0;">Nama Device 6</h3>
-                    <p style="font-size:12px; color:#64748b; margin:4px 0 0;">Keterangan singkat device</p>
+                    <h3 style="font-size:14px; font-weight:700; margin:0;">Rodent Monitoring Station</h3>
+                    <p style="font-size:12px; color:#64748b; margin:4px 0 0;">Perangkat untuk memantau keberadaan tikus di area tertentu.</p>
                 </div>
             </div>
 
             <div style="background:white; border:1px solid #e2e8f0; border-radius:16px; overflow:hidden;">
                 <img src="{{ asset('images/device-7.jpeg') }}" alt="Device 7" style="width:100%; aspect-ratio:4/3; object-fit:cover; background:#e2e8f0;">
                 <div style="padding:14px;">
-                    <h3 style="font-size:14px; font-weight:700; margin:0;">Nama Device 7</h3>
-                    <p style="font-size:12px; color:#64748b; margin:4px 0 0;">Keterangan singkat device</p>
+                    <h3 style="font-size:14px; font-weight:700; margin:0;">Insect Light Trap (ILT)</h3>
+                    <p style="font-size:12px; color:#64748b; margin:4px 0 0;">Perangkat untuk menangkap serangga menggunakan cahaya.</p>
                 </div>
             </div>
 
@@ -158,32 +131,32 @@
 
             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:20px;">
                 <div style="border:1px solid #e2e8f0; border-radius:16px; padding:22px;">
-                    <div style="font-size:26px;">🪰</div>
+                    <div class="landing-feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 8v9m0-9c-2-4-6-4-7-3 1 2 3 3 7 3Zm0 0c2-4 6-4 7-3-1 2-3 3-7 3Zm0 4-5-2m5 2 5-2M9 19l3-2 3 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg></div>
                     <h3 style="font-size:16px; font-weight:700; margin:12px 0 6px;">Pengendalian Lalat</h3>
                     <p style="font-size:14px; color:#64748b; margin:0;">Pemasangan perangkap lalat dan Insect Light Trap di area rawan seperti penerimaan bahan baku dan ruang proses.</p>
                 </div>
                 <div style="border:1px solid #e2e8f0; border-radius:16px; padding:22px;">
-                    <div style="font-size:26px;">🐀</div>
+                    <div class="landing-feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm10 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm-5-2c-4 0-7 3-7 7a5 5 0 0 0 5 5h4a5 5 0 0 0 5-5c0-4-3-7-7-7Zm-2 6h.01m5 0h.01m-4 3h2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg></div>
                     <h3 style="font-size:16px; font-weight:700; margin:12px 0 6px;">Pengendalian Tikus</h3>
                     <p style="font-size:14px; color:#64748b; margin:0;">Penempatan Rodent Bait Station di titik strategis dalam dan luar bangunan untuk mencegah infestasi hewan pengerat.</p>
                 </div>
                 <div style="border:1px solid #e2e8f0; border-radius:16px; padding:22px;">
-                    <div style="font-size:26px;">🔍</div>
+                    <div class="landing-feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10.5" cy="10.5" r="6.5" stroke-width="1.7"/><path d="m15.5 15.5 5 5M8 10.5l1.7 1.7 3.3-3.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg></div>
                     <h3 style="font-size:16px; font-weight:700; margin:12px 0 6px;">Inspeksi Berkala</h3>
                     <p style="font-size:14px; color:#64748b; margin:0;">Pemeriksaan rutin harian terhadap seluruh titik monitoring untuk mendeteksi aktivitas hama sedini mungkin.</p>
                 </div>
                 <div style="border:1px solid #e2e8f0; border-radius:16px; padding:22px;">
-                    <div style="font-size:26px;">📋</div>
+                    <div class="landing-feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="5" y="4" width="14" height="17" rx="2" stroke-width="1.7"/><path d="M9 4.5h6V7H9zM8.5 11h7m-7 4h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg></div>
                     <h3 style="font-size:16px; font-weight:700; margin:12px 0 6px;">Pencatatan & Pelaporan</h3>
                     <p style="font-size:14px; color:#64748b; margin:0;">Dokumentasi tindakan, tingkat aktivitas, dan hasil pemeriksaan secara digital dan tertelusur.</p>
                 </div>
                 <div style="border:1px solid #e2e8f0; border-radius:16px; padding:22px;">
-                    <div style="font-size:26px;">🛠️</div>
+                    <div class="landing-feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m14 7 3 3m-9.5 9.5-4-4L14 5a4 4 0 0 0 5 5L9.5 19.5Z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/><path d="m14.5 14.5 5 5" stroke-linecap="round" stroke-width="1.7"/></svg></div>
                     <h3 style="font-size:16px; font-weight:700; margin:12px 0 6px;">Rekomendasi Perbaikan</h3>
                     <p style="font-size:14px; color:#64748b; margin:0;">Tindak lanjut berupa rekomendasi dan perbaikan area, dilengkapi catatan dan dokumentasi foto.</p>
                 </div>
                 <div style="border:1px solid #e2e8f0; border-radius:16px; padding:22px;">
-                    <div style="font-size:26px;">📊</div>
+                    <div class="landing-feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19V5m0 14h16M7 15l4-4 3 2 5-6" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg></div>
                     <h3 style="font-size:16px; font-weight:700; margin:12px 0 6px;">Laporan Berkala</h3>
                     <p style="font-size:14px; color:#64748b; margin:0;">Ringkasan dan tren aktivitas hama yang dapat diunduh sebagai laporan resmi Quality Control.</p>
                 </div>
@@ -197,17 +170,17 @@
 
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:24px;">
             <div style="text-align:center; padding: 24px;">
-                <div style="width:56px; height:56px; border-radius:16px; background:#e0f2fe; display:flex; align-items:center; justify-content:center; font-size:26px; margin:0 auto 16px;">⚡</div>
+                <div class="landing-feature-icon landing-feature-icon--large" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m13 2-9 12h7l-1 8 10-13h-7l1-7Z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg></div>
                 <h3 style="font-size:16px; font-weight:700; margin-bottom:8px;">Real-Time & Digital</h3>
                 <p style="font-size:14px; color:#64748b;">Setiap pencatatan langsung tersimpan dan dapat diakses kapan saja tanpa perlu menunggu rekap manual.</p>
             </div>
             <div style="text-align:center; padding: 24px;">
-                <div style="width:56px; height:56px; border-radius:16px; background:#dcfce7; display:flex; align-items:center; justify-content:center; font-size:26px; margin:0 auto 16px;">📌</div>
+                <div class="landing-feature-icon landing-feature-icon--large" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 4h8l-1 6 3 3v2H6v-2l3-3-1-6Zm4 11v6" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg></div>
                 <h3 style="font-size:16px; font-weight:700; margin-bottom:8px;">Tertelusur & Terdokumentasi</h3>
                 <p style="font-size:14px; color:#64748b;">Setiap temuan dilengkapi catatan dan foto, sehingga riwayat penanganan mudah ditelusuri saat audit.</p>
             </div>
             <div style="text-align:center; padding: 24px;">
-                <div style="width:56px; height:56px; border-radius:16px; background:#fef3c7; display:flex; align-items:center; justify-content:center; font-size:26px; margin:0 auto 16px;">📈</div>
+                <div class="landing-feature-icon landing-feature-icon--large" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19V5m0 14h16M7 15l4-4 3 2 5-6" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg></div>
                 <h3 style="font-size:16px; font-weight:700; margin-bottom:8px;">Data & Analitik Terpusat</h3>
                 <p style="font-size:14px; color:#64748b;">Tren aktivitas hama tersaji dalam dashboard, mendukung pengambilan keputusan yang lebih cepat dan tepat.</p>
             </div>
